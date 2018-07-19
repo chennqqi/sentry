@@ -29,33 +29,6 @@ class BitbucketRepositoryProvider(providers.IntegrationRepositoryProvider):
 
         return integration_model.get_installation()
 
-    def get_config(self, organization):
-        choices = []
-        for i in Integration.objects.filter(organizations=organization, provider='bitbucket'):
-            choices.append((i.id, i.name))
-
-        if not choices:
-            choices = [('', '')]
-        return [
-            {
-                'name': 'integration_id',
-                'label': 'Bitbucket Integration',
-                'type': 'choice',
-                'choices': choices,
-                'initial': choices[0][0],
-                'help': 'Select which Bitbucket integration to authenticate with.',
-                'required': True,
-            },
-            {
-                'name': 'name',
-                'label': 'Repository Name',
-                'type': 'text',
-                'placeholder': 'e.g. getsentry/sentry',
-                'help': 'Enter your repository name, including the owner.',
-                'required': True,
-            },
-        ]
-
     def validate_config(self, organization, config, actor=None):
         """
         ```
