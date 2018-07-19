@@ -1344,7 +1344,7 @@ class GetHashesFromEventTest(TestCase):
         http_comp_hash.return_value = [['baz']]
         stack_comp_hash.return_value = [['foo', 'bar']]
         event = Event(
-            node_data={
+            data={
                 'sentry.interfaces.Stacktrace': {
                     'frames': [{
                         'lineno': 1,
@@ -1369,7 +1369,7 @@ class GetHashesFromEventTest(TestCase):
 class GetHashesFromFingerprintTest(TestCase):
     def test_default_value(self):
         event = Event(
-            node_data={
+            data={
                 'sentry.interfaces.Stacktrace': {
                     'frames': [
                         {
@@ -1395,7 +1395,7 @@ class GetHashesFromFingerprintTest(TestCase):
 
     def test_custom_values(self):
         event = Event(
-            node_data={
+            data={
                 'sentry.interfaces.Stacktrace': {
                     'frames': [
                         {
